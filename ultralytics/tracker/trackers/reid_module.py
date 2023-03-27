@@ -23,6 +23,16 @@ def postprocess(features):
 class ReID():
     def __init__(self, device='cuda', size = (224,224), batch_size = 16):
         super(ReID).__init__()
+
+        self.model = models.resnet50(pretrained=True)
+        # state_dict_model = torch.load("model/ft_ResNet50/net_last.pth")
+        # new_state_dict = OrderedDict()
+        # for k, v in state_dict_model.items():
+        #         if "model." in k:
+        #             name = k.replace("model.", "", 1)
+        #             new_state_dict[name] = v
+        # self.model.load_state_dict(new_state_dict)     
+        self.model.eval().cuda().half()
         self.model = models.resnet50(pretrained=True)
         state_dict_model = torch.load("./reid/lightning_logs/version_0/checkpoints/epoch=0-step=614.ckpt")['state_dict']
         new_state_dict = OrderedDict()
