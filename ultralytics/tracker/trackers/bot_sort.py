@@ -9,6 +9,7 @@ from ..utils.gmc import GMC
 from ..utils.kalman_filter import KalmanFilterXYWH
 from .basetrack import TrackState
 from .byte_tracker import BYTETracker, STrack
+from .reid_module import ReID
 
 
 class BOTrack(STrack):
@@ -101,7 +102,7 @@ class BOTSORT(BYTETracker):
 
         if args.with_reid:
             # haven't supported BoT-SORT(reid) yet
-            self.encoder = None
+            self.encoder = ReID()
         # self.gmc = GMC(method=args.cmc_method, verbose=[args.name, args.ablation])
         self.gmc = GMC(method=args.cmc_method)
 
